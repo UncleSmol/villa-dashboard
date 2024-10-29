@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="description" content="Villa Roma Employee Self Service Portal - Access documentation, manuals, and services">
+        <!-- Core Stylesheet -->
+        <link rel="stylesheet" href="styles.css" />
+        <title>Dashboard | Villa Roma - ESS Portal</title>
+    </head>
+    <body>
+        <!-- Header Section -->
+        <header class="main-header">
+            <div class="logo-container">
+                <img src="./images/logo.png" alt="Villa Roma Logo" />
+            </div>
+        </header>
+
+        <!-- Portal Welcome -->
+        <main class="portal-container">
+            <h1 class="portal-title">VILLA ROMA ESS PORTAL</h1>
+            <p class="portal-welcome">Welcome</p>
+
+            <!-- Section Divider -->
+            <div class="section-break" role="separator"></div>
+
+            <!-- Documentation Section -->
+            <section class="documentation-section" aria-label="Documentation">
+                <div class="section-header">
+                    <h2>DOCUMENTATIONS
+                       <!-- Replace your current toggle buttons with this structure -->
+					<div class="toggle-btn" >
+						<svg class="toggle-icon" viewBox="0 0 24 24" width="24" height="24">
+							<line class="vertical" x1="12" y1="5" x2="12" y2="19" stroke="currentColor" stroke-width="2" />
+							<line class="horizontal" x1="5" y1="12" x2="19" y2="12" stroke="currentColor" stroke-width="2" />
+						</svg>
+					</div>
+
+                    </h2>
+                    <div class="section-description">
+                        <p>Access all our in-house manual guides, policies procedures and processes.</p>
+                        <p>All Employees are strongly advised and urged to go through all documents in this section over time.</p>
+                        <p>The documents listed below, all provide a comprehensive view of the vision and culture we strive to build and maintain at Villa Roma as a unit and in turn, helping us all contribute towards this mission.</p>
+                    </div>
+                </div>
+
+                <div class="content-wrapper">
+                    <!-- Manual Guides -->
+                    <div class="service-category"
+					id="service-category-manual-guides">
+                        <h3>MANUAL GUIDES</h3>
+						<p>Manuals</p>
+                        <ul class="manual-list">
+                            <li>
+                                <a href="https://unclesmol.github.io/work_ettiquette/" 
+                                   target="_blank" 
+                                   rel="noopener noreferrer">
+                                   Work Etiquette
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://unclesmol.github.io/waste_management/" 
+                                   target="_blank" 
+                                   rel="noopener noreferrer">
+                                   Waste Management
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Policies & Procedures -->
+                    <div class="service-category"
+					id="service-category-policies-procedures">
+                        <h3>POLICIES & PROCEDURES</h3>
+                        <div class="procedures-content">
+							<p>Standard Operational Procedures</p>
+							<ul class="procedures-list">
+								<li>
+									<a href="#"
+									rel="noopener noreferrer"
+									target="_blank">Answering a Telephone Call</a>
+								</li>
+								<li>
+									<a href="#"
+									rel="noopener noreferrer"
+									target="_blank">Stocking Inventory</a>
+								</li>
+								<li>
+									<a href="#"
+									rel="noopener noreferrer"
+									target="_blank"></a>
+								</li>
+							</ul>
+						</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section Divider -->
+            <div class="section-break" role="separator"></div>
+
+            <!-- User Services Section -->
+            <section class="services-section" aria-label="User Services">
+                <div class="section-header">
+                    <h2>USER SERVICES
+                      <!-- Replace your current toggle buttons with this structure -->
+<div class="toggle-btn" >
+    <svg class="toggle-icon" viewBox="0 0 24 24" width="24" height="24">
+        <line class="vertical" x1="12" y1="5" x2="12" y2="19" stroke="currentColor" stroke-width="2" />
+        <line class="horizontal" x1="5" y1="12" x2="19" y2="12" stroke="currentColor" stroke-width="2" />
+    </svg>
+</div>
+
+                    </h2>
+                </div>
+
+                <div class="services-grid">
+                    <div class="service-item" title="Housekeeping">
+                        <img src="./images/housekeeping-svgrepo-com.svg" alt="Housekeeping Services" />
+                        <span class="service-label">Housekeeping</span>
+                    </div>
+                    <div class="service-item" title="Administration">
+                        <img src="./images/administration-svgrepo-com.svg" alt="Administration Services" />
+                        <span class="service-label">Administration</span>
+                    </div>
+                    <div class="service-item" title="Dining & Catering">
+                        <img src="./images/dining-and-catering-svgrepo-com.svg" alt="Dining & Catering Services" />
+                        <span class="service-label">Dining & Catering</span>
+                    </div>
+                    <div class="service-item" title="Conference">
+                        <img src="./images/conference-hall-svgrepo-com.svg" alt="Conference Services" />
+                        <span class="service-label">Conference</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section Divider -->
+            <div class="section-break" role="separator"></div>
+
+            <!-- Notification Component -->
+            <div class="notification-container" role="alert" aria-live="polite">
+                <h3>Alert!</h3>
+                <p>2 new manuals are available.</p>
+            </div>
+
+            <!-- Loading State -->
+            <div class="loading-container" aria-hidden="true">
+                <p class="loading-text">Something is happening here...</p>
+                <div class="loader">
+                    <div class="loader-ball"></div>
+                    <div class="loader-ball"></div>
+                    <div class="loader-ball"></div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Core JavaScript -->
+        <script src="script.js"></script>
+    </body>
+</html>
