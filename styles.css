@@ -133,11 +133,25 @@ a {
     color: blueviolet;
     text-decoration: none;
     transition: color var(--transition-fast);
-	font-size: var(--font-size-xs);
+    font-size: var(--font-size-xs);
+    
+    -webkit-transition:font-size var(--transition-fast);
+    -moz-transition:font-size var(--transition-fast);
+    -ms-transition:font-size var(--transition-fast);
+    -o-transition:font-size var(--transition-fast);
+    -webkit-transition: font-size var(--transition-fast);
+    transition: font-size var(--transition-fast);
 }
 
 a:hover {
-    color: var(--color-primary);
+    color: rgb(255, 149, 0);
+    font-size: 9pt;
+      -webkit-transition:font-size var(--transition-fast);
+    -moz-transition:font-size var(--transition-fast);
+    -ms-transition:font-size var(--transition-fast);
+    -o-transition:font-size var(--transition-fast);
+    -webkit-transition: font-size var(--transition-fast);
+    transition: font-size var(--transition-fast);
 }
 
 button {
@@ -462,6 +476,8 @@ button:focus {
 
 /* Notification Component */
 .notification-container {
+    width: 80%;
+    margin: 0 auto;
     display: flex;
     align-items: center;
     gap: var(--spacing-sm);
