@@ -1,273 +1,113 @@
-/* ==========================================================================
-   CSS Reset & Global Styles
-   ========================================================================== */
-
-/* Custom Properties / Variables */
-:root {
-    /* Colors */
-    --color-primary: #000000;
-    --color-secondary: #5a5a5a;
-    --color-background: #ffffff;
-    --color-text: #5a5a5a;
-    --color-text-light: #ffffff;
-    --color-border: #000000;
-    --color-shadow: rgba(90, 90, 90, 0.3);
-    
-    /* Typography */
-    --font-primary: arial, sans-serif;
-    --font-secondary: 'Roboto', 'Helvetica Neue', sans-serif;
-    --font-size-xs: 0.75rem;    /* 12px */
-    --font-size-sm: 0.875rem;   /* 14px */
-    --font-size-base: 1rem;     /* 16px */
-    --font-size-lg: 1.125rem;   /* 18px */
-    --font-size-xl: 1.25rem;    /* 20px */
-    --font-size-2xl: 1.5rem;    /* 24px */
-    
-    /* Spacing */
-    --spacing-xs: 0.25rem;      /* 4px */
-    --spacing-sm: 0.5rem;       /* 8px */
-    --spacing-md: 1rem;         /* 16px */
-    --spacing-lg: 1.5rem;       /* 24px */
-    --spacing-xl: 2rem;         /* 32px */
-    
-    /* Layout */
-    --container-width: 1200px;
-    --header-height: 70px;
-    
-    /* Z-index layers */
-    --z-index-base: 1;
-    --z-index-header: 100;
-    --z-index-modal: 1000;
-    --z-index-overlay: 2000;
-}
-
-/* Box sizing rules */
+/* Modern Reset */
 *,
 *::before,
 *::after {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
-    margin: 0;
-    padding: 0;
 }
 
-/* Remove default margin and padding */
-html,
-body,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-figure,
-blockquote,
-dl,
-dd {
-    margin: 0;
-    padding: 0;
+:root {
+    --brand-color: #2c3e50;
+    --accent-color: #e74c3c;
+    --text-primary: #2c3e50;
+    --text-secondary: #7f8c8d;
+    --background: #f9fafb;
+    --white: #ffffff;
+    --card-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+    --transition: all 0.3s ease;
 }
 
-/* Set core root defaults */
-html {
-    font-size: 16px;
-    scroll-behavior: smooth;
-    height: 100%;
-    -webkit-text-size-adjust: 100%;
-    text-size-adjust: 100%;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-
-/* Set core body defaults */
 body {
-    min-height: 100vh;
-    font-family: var(--font-primary);
-    font-size: var(--font-size-base);
+    font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--background);
+    color: var(--text-primary);
     line-height: 1.5;
-    text-rendering: optimizeSpeed;
     -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    background-color: var(--color-background);
-    color: var(--color-text);
-    overflow-x: hidden;
 }
 
-/* Remove list styles */
-ul,
-ol {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    line-height: 1;
-}
-
-/* Set core anchor defaults */
-a {
-    text-decoration: none;
-    color: inherit;
-    cursor: pointer;
-}
-p, li{
-    font-size: var(--font-size-s);
-    line-height: 1.3;
-}
-
-/* Make images easier to work with */
-img,
-picture,
-video,
-canvas,
-svg {
-    display: block;
-    max-width: 100%;
-    height: auto;
-}
-
-/* Remove default button styles */
-button {
-    background: none;
-    border: none;
-    padding: 0;
-    cursor: pointer;
-    font: inherit;
-    color: inherit;
-}
-
-/* Inherit fonts for inputs and buttons */
-input,
-button,
-textarea,
-select {
-    font: inherit;
-    color: inherit;
-}
-
-/* Remove all animations and transitions for people that prefer not to see them */
-@media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-        scroll-behavior: auto !important;
-    }
-}
-
-/* Focus styles */
-:focus-visible {
-    outline: 2px solid var(--color-primary);
-    outline-offset: 2px;
-}
-
-/* Selection styles */
-::selection {
-    background-color: var(--color-primary);
-    color: var(--color-text-light);
-}
-
-/* Scrollbar styles */
-::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-}
-
-::-webkit-scrollbar-track {
-    background: var(--color-background);
-}
-
-::-webkit-scrollbar-thumb {
-    background: var(--color-secondary);
-    border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: var(--color-primary);
-}
-
-/* Hidden attribute */
-[hidden] {
-    display: none !important;
-}
-
-/* Screen reader only */
-.sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
-}
-
-/* Container class */
-.container {
-    width: 100%;
-    max-width: var(--container-width);
-    margin: 0 auto;
-    padding: 0 var(--spacing-md);
-}
-
-/* Clearfix */
-.clearfix::after {
-    content: '';
-    display: table;
-    clear: both;
-}
-
-
-/* ==========================================================================
-   Header Component Styles
-   ========================================================================== */
-
-/* Header Container */
+/* Header Styling */
 .app-header {
+    background: var(--white);
     position: fixed;
+    width: 100%;
     top: 0;
     left: 0;
-    right: 0;
-    height: 70px; /* Base height for mobile */
-    background-color: var(--color-background);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    z-index: var(--z-index-header);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0 var(--spacing-md);
-    
-    /* Ensure smooth transitions for potential theme changes */
-    transition: background-color 0.3s ease, 
-                box-shadow 0.3s ease;
+    z-index: 100;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
-/* Logo Container */
 .logo-wrapper {
-    width: 180px; /* Mobile-first width */
-    height: 50px;
+    padding: 0.8rem;
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    justify-content: center;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-/* Logo Image */
 .logo-wrapper img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain; /* Maintains aspect ratio */
-    object-position: center;
-    /* Add subtle fade-in animation on load */
-    animation: logoFadeIn 0.5s ease;
+    height: 40px;
+    width: auto;
+    transition: var(--transition);
 }
 
-/* Logo Load Animation */
-@keyframes logoFadeIn {
+/* Main Content Area */
+.app-main {
+    margin-top: 60px;
+    padding: 1.5rem 1rem;
+}
+
+/* Portal Introduction */
+.portal-intro {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: var(--card-shadow);
+}
+
+.portal-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--brand-color);
+    margin-bottom: 1rem;
+    letter-spacing: -0.5px;
+}
+
+.portal-title span {
+    background: linear-gradient(120deg, var(--brand-color), var(--accent-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.portal-description {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+.portal-description p {
+    margin-bottom: 0.75rem;
+}
+
+.portal-description p:last-child {
+    margin-bottom: 0;
+}
+
+/* Section Break */
+.section-break {
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(0,0,0,0.1), transparent);
+    margin: 2rem 0;
+}
+
+/* Animations */
+@keyframes fadeIn {
     from {
         opacity: 0;
-        transform: translateY(-10px);
+        transform: translateY(10px);
     }
     to {
         opacity: 1;
@@ -275,293 +115,53 @@ select {
     }
 }
 
-/* Tablet Breakpoint */
-@media screen and (min-width: 768px) {
-    .app-header {
-        height: 80px;
-    }
-
-    .logo-wrapper {
-        width: 200px;
-        height: 60px;
-    }
-}
-
-/* Desktop Breakpoint */
-@media screen and (min-width: 1024px) {
-    .app-header {
-        padding: 0 var(--spacing-xl);
-    }
-
-    .logo-wrapper {
-        width: 220px;
-        height: 65px;
-    }
-}
-
-/* Print Styles */
-@media print {
-    .app-header {
-        position: static;
-        box-shadow: none;
-        border-bottom: 1px solid #000;
-    }
-}
-
-/* High Contrast Mode */
-@media (prefers-contrast: high) {
-    .app-header {
-        border-bottom: 2px solid currentColor;
-        box-shadow: none;
-    }
-}
-
-/* Reduced Motion */
-@media (prefers-reduced-motion: reduce) {
-    .logo-wrapper img {
-        animation: none;
-    }
-}
-
-/* ==========================================================================
-   Main Content Area Styles
-   ========================================================================== */
-
-.app-main {
-    padding-top: calc(var(--header-height) + var(--spacing-md));
-    max-width: 786px;
-    margin: 0 auto;
-    padding-inline: var(--spacing-md);
-}
-
-/* Portal Introduction */
 .portal-intro {
-    margin-bottom: var(--spacing-xl);
+    animation: fadeIn 0.6s ease-out;
 }
 
-.portal-title {
-    font-size: var(--font-size-2xl);
-    text-align: center;
-    margin-bottom: var(--spacing-md);
+/* Media Queries */
+@media screen and (min-width: 768px) {
+    .app-main {
+        padding: 2rem;
+        margin-top: 70px;
+    }
+
+    .portal-intro {
+        padding: 2rem;
+    }
+
+    .portal-title {
+        font-size: 2.25rem;
+    }
+
+    .portal-description {
+        font-size: 1rem;
+        max-width: 700px;
+    }
+
+    .logo-wrapper img {
+        height: 50px;
+    }
 }
 
-.portal-description {
-    font-size: var(--font-size-sm);
-    font-style: italic;
-    padding-left: var(--spacing-lg);
-    padding-right: var(--spacing-lg);
+/* Dark Mode */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --brand-color: #3498db;
+        --accent-color: #e74c3c;
+        --text-primary: #ecf0f1;
+        --text-secondary: #bdc3c7;
+        --background: #1a1a1a;
+        --white: #2c2c2c;
+        --card-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .app-header {
+        background: rgba(44, 44, 44, 0.8);
+    }
 }
 
-/* Section Break */
-.section-break {
-    height: 2px;
-    background-color: #ff0000;
-    margin: var(--spacing-sm) 0;
-}
-
-/* Common Section Styles */
-.documentation-section,
-.services-section {
-    margin-bottom: var(--spacing-xl);
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: var(--border-radius-md);
-}
-
-/* Section Headers */
-.section-header {
-    position: relative;
-    margin-bottom: var(--spacing-md);
-}
-
-.section-header h2 {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: var(--font-size-xl);
-    padding: var(--spacing-md);
-    background-color: rgba(255, 255, 255, 0.9);
-    border-radius: var(--border-radius-sm);
-    cursor: pointer;
-    transition: background-color var(--transition-normal);
-}
-
-.section-header h2:hover {
-    background-color: rgba(255, 255, 255, 1);
-}
-
-/* Services Section Specific Styles */
-.services-section .content-wrapper {
-    opacity: 0;
-    max-height: 0;
-    overflow: hidden;
-    transition: opacity var(--transition-normal),
-                max-height var(--transition-normal);
-           
-}
-
-/* Services Grid - Fixed Display Issues */
-.services-grid {
-    opacity: 0;
-    max-height: 0;
-    overflow: hidden;
-    display: grid; /* Keep grid layout even when hidden */
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: var(--spacing-md);
-    padding: var(--spacing-md);
-    transition: opacity var(--transition-normal),
-                max-height var(--transition-normal);
-}
-
-/* Expanded States - Updated Selectors */
-.section-header[aria-expanded="true"] + .section-description,
-.section-header[aria-expanded="true"] + .content-wrapper,
-.section-header[aria-expanded="true"] ~ .content-wrapper, /* Added for services section */
-.service-category[aria-expanded="true"] .manual-list,
-.service-category[aria-expanded="true"] .procedures-list,
-.service-category[aria-expanded="true"] .policies-list,
-.services-section .content-wrapper[aria-expanded="true"],
-.services-section .content-wrapper[aria-expanded="true"] .services-grid {
-    display: grid;
-    opacity: 1;
-    max-height: 2000px; /* Adjustable based on content */
-    margin-bottom: var(--spacing-md);
-}
-
-
-/* Toggle Button */
-.toggle-btn {
-    padding: var(--spacing-xs);
-    transition: transform 0.3s ease;
-}
-
-.toggle-btn[aria-expanded="true"] {
-    transform: rotate(45deg);
-}
-
-/* Section Content */
-
-.section-description{
-         padding-left: var(--spacing-lg);
-                padding-right: var(--spacing-lg);
-}
-
-.section-description,
-.content-wrapper {
-    display: none;
-    opacity: 0;
-    max-height: 0;
-    overflow: hidden;
-    transition: opacity 0.3s ease, max-height 0.3s ease;
-}
-
-/* Service Categories */
-.service-category {
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: var(--border-radius-sm);
-    padding: var(--spacing-md);
-    margin-bottom: var(--spacing-md);
-    cursor: pointer;
-}
-
-.service-category h3 {
-    font-size: var(--font-size-lg);
-    margin-bottom: var(--spacing-sm);
-}
-
-/* Document Groups */
-.document-group {
-    margin-bottom: var(--spacing-md);
-}
-
-.document-group p {
-    font-weight: bold;
-    margin-bottom: var(--spacing-sm);
-}
-
-/* Lists and Links */
-.manual-list,
-.procedures-list,
-.policies-list {
-    display: none;
-    opacity: 0;
-    max-height: 0;
-    overflow: hidden;
-    transition: opacity 0.3s ease, max-height 0.3s ease;
-}
-
-.manual-list li,
-.procedures-list li,
-.policies-list li {
-    margin-bottom: var(--spacing-xs);
-}
-
-.manual-list a,
-.procedures-list a,
-.policies-list a {
-    display: block;
-    padding: var(--spacing-xs) var(--spacing-sm);
-    color: var(--color-primary);
-    font-size: var(--font-size-sm);
-    transition: all 0.3s ease;
-}
-
-.manual-list a:hover,
-.procedures-list a:hover,
-.policies-list a:hover {
-    background-color: rgba(0, 0, 0, 0.05);
-    transform: translateX(5px);
-}
-
-/* Services Grid */
-.services-grid {
-    display: none;
-    opacity: 0;
-    max-height: 0;
-    overflow: hidden;
-    transition: opacity 0.3s ease, max-height 0.3s ease;
-    
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: var(--spacing-md);
-    padding: var(--spacing-md);
-}
-
-.service-item {
-    background: white;
-    padding: var(--spacing-md);
-    border-radius: var(--border-radius-sm);
-    text-align: center;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-}
-
-.service-item:hover {
-    transform: translateY(-5px);
-}
-
-.service-item img {
-    width: 48px;
-    height: 48px;
-    margin: 0 auto var(--spacing-sm);
-}
-
-.service-label {
-    font-size: var(--font-size-sm);
-    font-weight: bold;
-}
-
-/* Show States */
-.section-header[aria-expanded="true"] + .section-description,
-.section-header[aria-expanded="true"] + .content-wrapper,
-.service-category[aria-expanded="true"] .manual-list,
-.service-category[aria-expanded="true"] .procedures-list,
-.service-category[aria-expanded="true"] .policies-list {
-    display: block;
-    opacity: 1;
-    max-height: 2000px; /* Arbitrary large value */
-}
-
-/* Loading Overlay */
+/* Loading State */
 .loading-overlay {
     position: fixed;
     top: 0;
@@ -569,52 +169,362 @@ select {
     right: 0;
     bottom: 0;
     background: rgba(255, 255, 255, 0.9);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.loading-overlay.active {
+    display: flex;
+}
+
+.loading-text {
+    color: var(--brand-color);
+    font-weight: 500;
+    margin-bottom: 1rem;
+}
+
+/* Documentation and Services Sections Base Styles */
+.documentation-section,
+.services-section {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: var(--card-shadow);
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+/* Section Headers */
+.section-header {
+    margin-bottom: 1rem;
+}
+
+.section-header h2 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.5rem;
+    color: var(--brand-color);
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--accent-color);
+    cursor: pointer;
+}
+
+/* Hide all expandable content by default */
+.content-wrapper, 
+.procedures-content,
+.document-nav,
+.section-description,
+.services-grid {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Show content when parent has .active class */
+.active > .content-wrapper,
+.active > .procedures-content,
+.active > .document-nav,
+.active > .section-description,
+.active .services-grid {
+    max-height: 2000px; /* Large enough to contain content */
+    opacity: 1;
+    margin-top: 1rem;
+}
+
+/* Category Styles with Dynamic Height */
+.service-category {
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+.service-category h3 {
+    color: var(--brand-color);
+    font-size: 1.2rem;
+    margin-bottom: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+/* List Containers */
+.manual-list,
+.procedures-list,
+.policies-list {
+    list-style: none;
+    padding-left: 1rem;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Show lists when parent is active */
+.active > .document-nav > .manual-list,
+.active > .document-nav > .procedures-list,
+.active > .document-nav > .policies-list {
+    max-height: 1000px;
+    opacity: 1;
+    margin-top: 1rem;
+}
+
+/* List Items */
+.manual-list li,
+.procedures-list li,
+.policies-list li {
+    margin-bottom: 0.8rem;
+}
+
+/* Links */
+.manual-list a,
+.procedures-list a,
+.policies-list a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: var(--transition);
+    display: block;
+    padding: 0.5rem;
+    border-radius: 4px;
+}
+
+.manual-list a:hover,
+.procedures-list a:hover,
+.policies-list a:hover {
+    color: var(--accent-color);
+    background: rgba(231, 76, 60, 0.1);
+}
+
+/* Services Grid */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1rem;
+    padding: 0;
+}
+
+.service-item {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    z-index: var(--z-index-overlay);
-    display: none;
+    padding: 1.5rem;
+    background: var(--background);
+    border-radius: 8px;
+    transition: var(--transition);
+    cursor: pointer;
 }
 
-/* Mobile Optimizations */
-@media (max-width: 768px) {
-    .app-main {
-        padding-inline: var(--spacing-sm);
+.service-item:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--card-shadow);
+}
+
+.service-item img {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 1rem;
+}
+
+.service-label {
+    color: var(--text-primary);
+    font-weight: 500;
+    text-align: center;
+}
+
+/* Toggle Button Styles */
+.toggle-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    transition: var(--transition);
+}
+
+.toggle-icon {
+    transition: var(--transition);
+}
+
+.active .toggle-icon {
+    transform: rotate(45deg);
+}
+
+/* Responsive Adjustments */
+@media screen and (min-width: 768px) {
+    .services-grid {
+        grid-template-columns: repeat(4, 1fr);
     }
 
     .section-header h2 {
-        font-size: var(--font-size-lg);
+        font-size: 1.75rem;
     }
 
-    .services-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-/* Add this as a separate CSS file or at the end of your existing CSS */
-
-@media (hover: hover) and (pointer: fine) {
-    /* Only apply hover effects on devices that support hover */
-    .service-category:not(.expanded):hover {
-        transform: translateX(5px);
-    }
-
-    .manual-list a:hover,
-    .procedures-list a:hover,
-    .policies-list a:hover {
-        transform: translateX(5px);
-        background-color: rgba(0, 0, 0, 0.05);
+    .service-category h3 {
+        font-size: 1.4rem;
     }
 }
 
-@media (hover: none) or (pointer: coarse) {
-    /* Remove hover effects on touch devices */
-    .service-category:hover,
-    .manual-list a:hover,
-    .procedures-list a:hover,
-    .policies-list a:hover {
-        transform: none !important;
-        background-color: transparent !important;
+/* Dark Mode Adjustments */
+@media (prefers-color-scheme: dark) {
+    .service-item {
+        background: rgba(255, 255, 255, 0.05);
     }
+
+    .service-item:hover {
+        background: rgba(255, 255, 255, 0.1);
+    }
+}
+
+/* Animation for smooth height transitions */
+@keyframes slideDown {
+    from {
+        max-height: 0;
+        opacity: 0;
+    }
+    to {
+        max-height: 2000px;
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        max-height: 2000px;
+        opacity: 1;
+    }
+    to {
+        max-height: 0;
+        opacity: 0;
+    }
+}
+
+/* Manual Guides Section */
+.manuals-content {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: all 0.3s ease-in-out;
+}
+
+.manual-group {
+    margin-bottom: 1rem;
+}
+
+.manual-header {
+    color: var(--text-secondary);
+    padding: 0.75rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 4px;
+    transition: var(--transition);
+}
+
+.manual-header:hover {
+    background: rgba(231, 76, 60, 0.1);
+    color: var(--accent-color);
+}
+
+.manual-list {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: all 0.3s ease-in-out;
+    padding-left: 1.5rem;
+}
+
+/* Show content when parent has .active class */
+.service-category.active > .manuals-content {
+    max-height: 2000px;
+    opacity: 1;
+    margin-top: 1rem;
+}
+
+.manual-group.active > .document-nav > .manual-list {
+    max-height: 1000px;
+    opacity: 1;
+    margin-top: 0.5rem;
+}
+
+/* Policies & Procedures Styles */
+.policies-content {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: all 0.3s ease-in-out;
+}
+
+.policy-group {
+    margin-bottom: 1rem;
+}
+
+.policy-header {
+    color: var(--text-secondary);
+    padding: 0.75rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 4px;
+    transition: var(--transition);
+}
+
+.policy-header:hover {
+    background: rgba(231, 76, 60, 0.1);
+    color: var(--accent-color);
+}
+
+.policy-group .document-nav {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: all 0.3s ease-in-out;
+}
+
+.procedures-list,
+.policies-list {
+    list-style: none;
+    padding-left: 1.5rem;
+}
+
+.procedures-list li,
+.policies-list li {
+    margin-bottom: 0.8rem;
+}
+
+.procedures-list a,
+.policies-list a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: var(--transition);
+    display: block;
+    padding: 0.5rem;
+    border-radius: 4px;
+}
+
+.procedures-list a:hover,
+.policies-list a:hover {
+    color: var(--accent-color);
+    background: rgba(231, 76, 60, 0.1);
+}
+
+/* Show content when parent has .active class */
+.service-category.active > .policies-content {
+    max-height: 2000px;
+    opacity: 1;
+    margin-top: 1rem;
+}
+
+.policy-group.active > .document-nav {
+    max-height: 1000px;
+    opacity: 1;
+    margin-top: 0.5rem;
 }
