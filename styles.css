@@ -591,3 +591,30 @@ select {
         grid-template-columns: repeat(2, 1fr);
     }
 }
+
+/* Add this as a separate CSS file or at the end of your existing CSS */
+
+@media (hover: hover) and (pointer: fine) {
+    /* Only apply hover effects on devices that support hover */
+    .service-category:not(.expanded):hover {
+        transform: translateX(5px);
+    }
+
+    .manual-list a:hover,
+    .procedures-list a:hover,
+    .policies-list a:hover {
+        transform: translateX(5px);
+        background-color: rgba(0, 0, 0, 0.05);
+    }
+}
+
+@media (hover: none) or (pointer: coarse) {
+    /* Remove hover effects on touch devices */
+    .service-category:hover,
+    .manual-list a:hover,
+    .procedures-list a:hover,
+    .policies-list a:hover {
+        transform: none !important;
+        background-color: transparent !important;
+    }
+}
