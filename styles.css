@@ -1,0 +1,580 @@
+/* ==========================================================================
+   CSS Reset & Global Styles
+   ========================================================================== */
+
+/* Custom Properties / Variables */
+:root {
+    /* Colors */
+    --color-primary: #000000;
+    --color-secondary: #5a5a5a;
+    --color-background: #ffffff;
+    --color-text: #5a5a5a;
+    --color-text-light: #ffffff;
+    --color-border: #000000;
+    --color-shadow: rgba(90, 90, 90, 0.3);
+    
+    /* Typography */
+    --font-primary: arial, sans-serif;
+    --font-secondary: 'Roboto', 'Helvetica Neue', sans-serif;
+    --font-size-xs: 0.75rem;    /* 12px */
+    --font-size-sm: 0.875rem;   /* 14px */
+    --font-size-base: 1rem;     /* 16px */
+    --font-size-lg: 1.125rem;   /* 18px */
+    --font-size-xl: 1.25rem;    /* 20px */
+    --font-size-2xl: 1.5rem;    /* 24px */
+    
+    /* Spacing */
+    --spacing-xs: 0.25rem;      /* 4px */
+    --spacing-sm: 0.5rem;       /* 8px */
+    --spacing-md: 1rem;         /* 16px */
+    --spacing-lg: 1.5rem;       /* 24px */
+    --spacing-xl: 2rem;         /* 32px */
+    
+    /* Layout */
+    --container-width: 1200px;
+    --header-height: 70px;
+    
+    /* Z-index layers */
+    --z-index-base: 1;
+    --z-index-header: 100;
+    --z-index-modal: 1000;
+    --z-index-overlay: 2000;
+}
+
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Remove default margin and padding */
+html,
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+figure,
+blockquote,
+dl,
+dd {
+    margin: 0;
+    padding: 0;
+}
+
+/* Set core root defaults */
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+    height: 100%;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Set core body defaults */
+body {
+    min-height: 100vh;
+    font-family: var(--font-primary);
+    font-size: var(--font-size-base);
+    line-height: 1.5;
+    text-rendering: optimizeSpeed;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: var(--color-background);
+    color: var(--color-text);
+    overflow-x: hidden;
+}
+
+/* Remove list styles */
+ul,
+ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* Set core anchor defaults */
+a {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+}
+
+/* Make images easier to work with */
+img,
+picture,
+video,
+canvas,
+svg {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+/* Remove default button styles */
+button {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    font: inherit;
+    color: inherit;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+    font: inherit;
+    color: inherit;
+}
+
+/* Remove all animations and transitions for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Focus styles */
+:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+/* Selection styles */
+::selection {
+    background-color: var(--color-primary);
+    color: var(--color-text-light);
+}
+
+/* Scrollbar styles */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--color-background);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--color-secondary);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--color-primary);
+}
+
+/* Hidden attribute */
+[hidden] {
+    display: none !important;
+}
+
+/* Screen reader only */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Container class */
+.container {
+    width: 100%;
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+}
+
+/* Clearfix */
+.clearfix::after {
+    content: '';
+    display: table;
+    clear: both;
+}
+
+
+/* ==========================================================================
+   Header Component Styles
+   ========================================================================== */
+
+/* Header Container */
+.app-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 70px; /* Base height for mobile */
+    background-color: var(--color-background);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: var(--z-index-header);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 var(--spacing-md);
+    
+    /* Ensure smooth transitions for potential theme changes */
+    transition: background-color 0.3s ease, 
+                box-shadow 0.3s ease;
+}
+
+/* Logo Container */
+.logo-wrapper {
+    width: 180px; /* Mobile-first width */
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Logo Image */
+.logo-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Maintains aspect ratio */
+    object-position: center;
+    /* Add subtle fade-in animation on load */
+    animation: logoFadeIn 0.5s ease;
+}
+
+/* Logo Load Animation */
+@keyframes logoFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Tablet Breakpoint */
+@media screen and (min-width: 768px) {
+    .app-header {
+        height: 80px;
+    }
+
+    .logo-wrapper {
+        width: 200px;
+        height: 60px;
+    }
+}
+
+/* Desktop Breakpoint */
+@media screen and (min-width: 1024px) {
+    .app-header {
+        padding: 0 var(--spacing-xl);
+    }
+
+    .logo-wrapper {
+        width: 220px;
+        height: 65px;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .app-header {
+        position: static;
+        box-shadow: none;
+        border-bottom: 1px solid #000;
+    }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+    .app-header {
+        border-bottom: 2px solid currentColor;
+        box-shadow: none;
+    }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    .logo-wrapper img {
+        animation: none;
+    }
+}
+
+/* ==========================================================================
+   Main Content Area Styles
+   ========================================================================== */
+
+.app-main {
+    padding-top: calc(var(--header-height) + var(--spacing-md));
+    max-width: 786px;
+    margin: 0 auto;
+    padding-inline: var(--spacing-md);
+}
+
+/* Portal Introduction */
+.portal-intro {
+    margin-bottom: var(--spacing-xl);
+}
+
+.portal-title {
+    font-size: var(--font-size-2xl);
+    text-align: center;
+    margin-bottom: var(--spacing-md);
+}
+
+.portal-description {
+    font-size: var(--font-size-sm);
+    font-style: italic;
+}
+
+/* Section Break */
+.section-break {
+    height: 2px;
+    background-color: #ff0000;
+    margin: var(--spacing-sm) 0;
+}
+
+/* Common Section Styles */
+.documentation-section,
+.services-section {
+    margin-bottom: var(--spacing-xl);
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: var(--border-radius-md);
+}
+
+/* Section Headers */
+.section-header {
+    position: relative;
+    margin-bottom: var(--spacing-md);
+}
+
+.section-header h2 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: var(--font-size-xl);
+    padding: var(--spacing-md);
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    transition: background-color var(--transition-normal);
+}
+
+.section-header h2:hover {
+    background-color: rgba(255, 255, 255, 1);
+}
+
+/* Services Section Specific Styles */
+.services-section .content-wrapper {
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: opacity var(--transition-normal),
+                max-height var(--transition-normal);
+}
+
+/* Services Grid - Fixed Display Issues */
+.services-grid {
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    display: grid; /* Keep grid layout even when hidden */
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: var(--spacing-md);
+    padding: var(--spacing-md);
+    transition: opacity var(--transition-normal),
+                max-height var(--transition-normal);
+}
+
+/* Expanded States - Updated Selectors */
+.section-header[aria-expanded="true"] + .section-description,
+.section-header[aria-expanded="true"] + .content-wrapper,
+.section-header[aria-expanded="true"] ~ .content-wrapper, /* Added for services section */
+.service-category[aria-expanded="true"] .manual-list,
+.service-category[aria-expanded="true"] .procedures-list,
+.service-category[aria-expanded="true"] .policies-list,
+.services-section .content-wrapper[aria-expanded="true"],
+.services-section .content-wrapper[aria-expanded="true"] .services-grid {
+    display: grid;
+    opacity: 1;
+    max-height: 2000px; /* Adjustable based on content */
+    margin-bottom: var(--spacing-md);
+}
+
+
+/* Toggle Button */
+.toggle-btn {
+    padding: var(--spacing-xs);
+    transition: transform 0.3s ease;
+}
+
+.toggle-btn[aria-expanded="true"] {
+    transform: rotate(45deg);
+}
+
+/* Section Content */
+.section-description,
+.content-wrapper {
+    display: none;
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: opacity 0.3s ease, max-height 0.3s ease;
+}
+
+/* Service Categories */
+.service-category {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: var(--border-radius-sm);
+    padding: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+    cursor: pointer;
+}
+
+.service-category h3 {
+    font-size: var(--font-size-lg);
+    margin-bottom: var(--spacing-sm);
+}
+
+/* Document Groups */
+.document-group {
+    margin-bottom: var(--spacing-md);
+}
+
+.document-group p {
+    font-weight: bold;
+    margin-bottom: var(--spacing-sm);
+}
+
+/* Lists and Links */
+.manual-list,
+.procedures-list,
+.policies-list {
+    display: none;
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: opacity 0.3s ease, max-height 0.3s ease;
+}
+
+.manual-list li,
+.procedures-list li,
+.policies-list li {
+    margin-bottom: var(--spacing-xs);
+}
+
+.manual-list a,
+.procedures-list a,
+.policies-list a {
+    display: block;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    color: var(--color-primary);
+    font-size: var(--font-size-sm);
+    transition: all 0.3s ease;
+}
+
+.manual-list a:hover,
+.procedures-list a:hover,
+.policies-list a:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+    transform: translateX(5px);
+}
+
+/* Services Grid */
+.services-grid {
+    display: none;
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: opacity 0.3s ease, max-height 0.3s ease;
+    
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: var(--spacing-md);
+    padding: var(--spacing-md);
+}
+
+.service-item {
+    background: white;
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius-sm);
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.service-item:hover {
+    transform: translateY(-5px);
+}
+
+.service-item img {
+    width: 48px;
+    height: 48px;
+    margin: 0 auto var(--spacing-sm);
+}
+
+.service-label {
+    font-size: var(--font-size-sm);
+    font-weight: bold;
+}
+
+/* Show States */
+.section-header[aria-expanded="true"] + .section-description,
+.section-header[aria-expanded="true"] + .content-wrapper,
+.service-category[aria-expanded="true"] .manual-list,
+.service-category[aria-expanded="true"] .procedures-list,
+.service-category[aria-expanded="true"] .policies-list {
+    display: block;
+    opacity: 1;
+    max-height: 2000px; /* Arbitrary large value */
+}
+
+/* Loading Overlay */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.9);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: var(--z-index-overlay);
+    display: none;
+}
+
+/* Mobile Optimizations */
+@media (max-width: 768px) {
+    .app-main {
+        padding-inline: var(--spacing-sm);
+    }
+
+    .section-header h2 {
+        font-size: var(--font-size-lg);
+    }
+
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
