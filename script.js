@@ -3,6 +3,20 @@ document.addEventListener('DOMContentLoaded', () => {
 	const toggleButtons = document.querySelectorAll('.toggle-btn');
 	const serviceCategories = document.querySelectorAll('.service-category');
 
+	// Add new selectors for manual guides and policies
+	const mainHeadings = document.querySelectorAll('.service-category h3');
+	const subHeadings = document.querySelectorAll(
+		'.document-group > p, .policy-folder > p'
+	);
+
+	// Initially hide all lists
+	document.querySelectorAll('.document-nav ul').forEach((ul) => {
+		ul.style.display = 'none';
+		ul.style.maxHeight = '0';
+		ul.style.overflow = 'hidden';
+		ul.style.transition = 'max-height 0.3s ease-in-out';
+	});
+
 	// Enhanced helper function for dynamic height calculations
 	function toggleElementWithTransition(
 		element,
@@ -10,7 +24,6 @@ document.addEventListener('DOMContentLoaded', () => {
 		parentElement = null
 	) {
 		if (isExpanding) {
-			// Determine proper display type
 			const displayType = element.classList.contains('services-grid')
 				? 'grid'
 				: 'block';
@@ -18,13 +31,10 @@ document.addEventListener('DOMContentLoaded', () => {
 			element.style.opacity = '0';
 			element.style.maxHeight = '0';
 
-			// Trigger reflow
-			element.offsetHeight;
+			element.offsetHeight; // Trigger reflow
 
-			// Calculate height including margins
 			const totalHeight = calculateTotalHeight(element);
 
-			// Add transitions
 			element.style.transition =
 				'max-height 0.3s ease-in-out, opacity 0.3s ease-in-out';
 			element.style.opacity = '1';
@@ -60,19 +70,12 @@ document.addEventListener('DOMContentLoaded', () => {
 			: 'block';
 		document.body.appendChild(clone);
 
-		// Get computed styles
 		const styles = window.getComputedStyle(clone);
-
-		// Calculate total height including margins and padding
 		const marginTop = parseInt(styles.marginTop) || 0;
 		const marginBottom = parseInt(styles.marginBottom) || 0;
 		const paddingTop = parseInt(styles.paddingTop) || 0;
 		const paddingBottom = parseInt(styles.paddingBottom) || 0;
-
-		// Get the content height
 		const contentHeight = clone.offsetHeight;
-
-		// Calculate total height with spacing
 		const totalHeight =
 			contentHeight + marginTop + marginBottom + paddingTop + paddingBottom;
 
@@ -115,10 +118,8 @@ document.addEventListener('DOMContentLoaded', () => {
 		const servicesGrid = section.querySelector('.services-grid');
 		const isExpanded = btn.getAttribute('aria-expanded') === 'true';
 
-		// Toggle button state
 		btn.setAttribute('aria-expanded', (!isExpanded).toString());
 
-		// Toggle content visibility
 		if (content) {
 			toggleElementWithTransition(content, !isExpanded, section);
 		}
@@ -129,17 +130,8 @@ document.addEventListener('DOMContentLoaded', () => {
 			toggleElementWithTransition(servicesGrid, !isExpanded, content);
 		}
 
-		// Update section state
 		section.classList.toggle('expanded', !isExpanded);
 	}
-
-	// Setup main section toggles
-	toggleButtons.forEach((btn) => {
-		btn.addEventListener('click', (e) => {
-			e.stopPropagation();
-			toggleSection(btn);
-		});
-	});
 
 	// Helper function for hover states
 	function updateHoverState(element, isExpanded) {
@@ -151,6 +143,62 @@ document.addEventListener('DOMContentLoaded', () => {
 		}
 	}
 
+	// Setup main section toggles
+	toggleButtons.forEach((btn) => {
+		btn.addEventListener('click', (e) => {
+			e.stopPropagation();
+			toggleSection(btn);
+		});
+	});
+
+	// New function to handle nested content toggling
+	function toggleNestedContent(element, contentToToggle) {
+		const isExpanded = element.getAttribute('aria-expanded') === 'true';
+		element.setAttribute('aria-expanded', (!isExpanded).toString());
+
+		if (!isExpanded) {
+			contentToToggle.style.display = 'block';
+			const height = contentToToggle.scrollHeight;
+			contentToToggle.style.maxHeight = `${height}px`;
+			element.classList.add('expanded');
+		} else {
+			contentToToggle.style.maxHeight = '0';
+			element.classList.remove('expanded');
+			setTimeout(() => {
+				contentToToggle.style.display = 'none';
+			}, 300);
+		}
+	}
+
+	// Setup handlers for main headings (MANUAL GUIDES and POLICIES & PROCEDURES)
+	mainHeadings.forEach((heading) => {
+		heading.setAttribute('aria-expanded', 'false');
+		heading.style.cursor = 'pointer';
+
+		heading.addEventListener('click', (e) => {
+			e.stopPropagation();
+			const category = heading.closest('.service-category');
+			const immediateNav = category.querySelector(':scope > .document-nav');
+			if (immediateNav) {
+				toggleNestedContent(heading, immediateNav);
+			}
+		});
+	});
+
+	// Setup handlers for subheadings (Standard Operational Procedures, Employee Policies, etc.)
+	subHeadings.forEach((subheading) => {
+		subheading.setAttribute('aria-expanded', 'false');
+		subheading.style.cursor = 'pointer';
+
+		subheading.addEventListener('click', (e) => {
+			e.stopPropagation();
+			const nav = subheading.nextElementSibling;
+			if (nav && nav.classList.contains('document-nav')) {
+				toggleNestedContent(subheading, nav);
+			}
+		});
+	});
+
 	// Setup service category toggles with nested content handling
 	serviceCategories.forEach((category) => {
 		category.addEventListener('click', () => {
@@ -158,26 +206,22 @@ document.addEventListener('DOMContentLoaded', () => {
 			const isExpanded = category.getAttribute('aria-expanded') === 'true';
 			const parentWrapper = category.closest('.content-wrapper');
 
-			// Toggle category state
 			category.setAttribute('aria-expanded', (!isExpanded).toString());
 			updateHoverState(category, !isExpanded);
 
-			// Toggle lists visibility
 			lists.forEach((list) => {
 				toggleElementWithTransition(list, !isExpanded, category);
 			});
 
-			// Adjust parent wrapper height
 			if (parentWrapper) {
 				setTimeout(() => {
-					// Adjust all expanded sections
 					document
 						.querySelectorAll('.documentation-section, .services-section')
 						.forEach((section) => {
 							if (
 								section
 									.querySelector('.toggle-btn')
-									.getAttribute('aria-expanded') === 'true'
+									?.getAttribute('aria-expanded') === 'true'
 							) {
 								adjustParentHeights(section);
 							}
@@ -206,14 +250,12 @@ document.addEventListener('DOMContentLoaded', () => {
 		const servicesGrid = servicesSection.querySelector('.services-grid');
 		const serviceItems = servicesSection.querySelectorAll('.service-item');
 
-		// Ensure services grid is properly initialized
 		if (servicesGrid) {
 			servicesGrid.style.opacity = '0';
 			servicesGrid.style.maxHeight = '0';
 			servicesGrid.style.overflow = 'hidden';
 		}
 
-		// Add hover effects to service items
 		serviceItems.forEach((item) => {
 			item.addEventListener('mouseenter', () => {
 				if (!servicesSection.classList.contains('expanded')) {
@@ -236,7 +278,6 @@ document.addEventListener('DOMContentLoaded', () => {
 		if (loadingOverlay) {
 			loadingOverlay.style.display = 'flex';
 			loadingOverlay.style.opacity = '0';
-			// Trigger reflow
 			loadingOverlay.offsetHeight;
 			loadingOverlay.style.opacity = '1';
 		}
@@ -254,7 +295,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	// Handle external links
 	document.querySelectorAll('a[target="_blank"]').forEach((link) => {
 		link.addEventListener('click', (e) => {
-			e.stopPropagation(); // Prevent triggering parent toggles
+			e.stopPropagation();
 			showLoading();
 			setTimeout(hideLoading, 1000);
 		});
@@ -272,4 +313,38 @@ document.addEventListener('DOMContentLoaded', () => {
 			if (description) description.style.display = 'none';
 			if (servicesGrid) servicesGrid.style.display = 'none';
 		});
+
+	// Add CSS styles for transitions and interactions
+	const style = document.createElement('style');
+	style.textContent = `
+        .service-category h3,
+        .document-group > p,
+        .policy-folder > p {
+            cursor: pointer;
+            padding: 10px;
+            margin: 0;
+            transition: background-color 0.3s ease;
+        }
+
+        .service-category h3:hover,
+        .document-group > p:hover,
+        .policy-folder > p:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+
+        .document-nav {
+            overflow: hidden;
+            transition: max-height 0.3s ease-in-out;
+        }
+
+        .document-nav ul {
+            padding-left: 20px;
+            margin: 0;
+        }
+
+        .expanded {
+            background-color: rgba(0, 0, 0, 0.02);
+        }
+    `;
+	document.head.appendChild(style);
 });

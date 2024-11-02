@@ -99,6 +99,7 @@ ol {
     list-style: none;
     margin: 0;
     padding: 0;
+    line-height: 1;
 }
 
 /* Set core anchor defaults */
@@ -106,6 +107,10 @@ a {
     text-decoration: none;
     color: inherit;
     cursor: pointer;
+}
+p, li{
+    font-size: var(--font-size-s);
+    line-height: 1.3;
 }
 
 /* Make images easier to work with */
@@ -343,6 +348,8 @@ select {
 .portal-description {
     font-size: var(--font-size-sm);
     font-style: italic;
+    padding-left: var(--spacing-lg);
+    padding-right: var(--spacing-lg);
 }
 
 /* Section Break */
@@ -389,6 +396,7 @@ select {
     overflow: hidden;
     transition: opacity var(--transition-normal),
                 max-height var(--transition-normal);
+           
 }
 
 /* Services Grid - Fixed Display Issues */
@@ -431,6 +439,12 @@ select {
 }
 
 /* Section Content */
+
+.section-description{
+         padding-left: var(--spacing-lg);
+                padding-right: var(--spacing-lg);
+}
+
 .section-description,
 .content-wrapper {
     display: none;
@@ -577,4 +591,3 @@ select {
         grid-template-columns: repeat(2, 1fr);
     }
 }
-
