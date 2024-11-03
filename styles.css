@@ -676,3 +676,165 @@ body {
         background: rgba(255, 255, 255, 0.05);
     }
 }
+
+/* Mobile Devices (Portrait phones and smaller) */
+@media screen and (max-width: 480px) {
+    .chatbot-wrapper {
+        bottom: 1rem;
+        right: 1rem;
+    }
+
+    /* Make chat toggle button slightly smaller on mobile */
+    .chat-toggle-btn {
+        width: 50px;
+        height: 50px;
+    }
+
+    /* Adjust chat panel to take full width on mobile */
+    .chat-panel {
+        width: calc(100vw - 2rem);
+        max-width: 100%;
+        position: fixed;
+        bottom: 70px;
+        right: 1rem;
+        left: 1rem;
+        max-height: 80vh; /* Limit height on mobile */
+    }
+
+    /* Adjust header for mobile */
+    .chat-header {
+        padding: 0.75rem;
+    }
+
+    .chat-header h3 {
+        font-size: 1rem;
+    }
+
+    /* Adjust content area for mobile */
+    .chat-content {
+        max-height: 60vh;
+    }
+
+    /* Adjust list items for mobile */
+    .chatbot-list a {
+        padding: 0.75rem;
+    }
+
+    .bot-icon {
+        font-size: 1.25rem;
+        margin-right: 0.75rem;
+    }
+
+    .bot-name {
+        font-size: 0.9rem;
+    }
+
+    .bot-description {
+        font-size: 0.75rem;
+    }
+}
+
+/* Small tablets and large phones (Landscape) */
+@media screen and (min-width: 481px) and (max-width: 768px) {
+    .chatbot-wrapper {
+        bottom: 1.5rem;
+        right: 1.5rem;
+    }
+
+    .chat-panel {
+        width: 300px;
+        max-height: 70vh;
+    }
+}
+
+/* Handle shorter screen heights */
+@media screen and (max-height: 600px) {
+    .chat-panel {
+        max-height: 400px;
+    }
+
+    .chat-content {
+        max-height: 300px;
+    }
+}
+
+/* Handle devices with notches */
+@supports (padding: max(0px)) {
+    .chatbot-wrapper {
+        padding-bottom: max(1rem, env(safe-area-inset-bottom));
+        padding-right: max(1rem, env(safe-area-inset-right));
+    }
+}
+
+/* Handle landscape orientation on mobile */
+@media screen and (max-width: 768px) and (orientation: landscape) {
+    .chat-panel {
+        max-height: 85vh;
+        bottom: 60px;
+    }
+
+    .chat-content {
+        max-height: calc(85vh - 60px);
+    }
+
+    .chatbot-list a {
+        padding: 0.6rem 0.75rem;
+    }
+
+    .bot-icon {
+        font-size: 1.1rem;
+    }
+}
+
+/* Handle devices with poor hover capability */
+@media (hover: none) {
+    .chat-toggle-btn:hover {
+        transform: none;
+    }
+
+    .chatbot-list a:hover {
+        background: none;
+    }
+
+    .chatbot-list a:active {
+        background: rgba(231, 76, 60, 0.1);
+    }
+}
+
+/* Custom Scrollbar Styles */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--brand-color) rgba(0, 0, 0, 0.05);
+}
+
+/* Webkit Scrollbar Styles */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--brand-color);
+    border-radius: 4px;
+    transition: var(--transition);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-color);
+}
+
+/* Dark Mode Adjustments */
+@media (prefers-color-scheme: dark) {
+    * {
+        scrollbar-color: var(--brand-color) rgba(255, 255, 255, 0.05);
+    }
+
+    ::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.05);
+    }
+}
