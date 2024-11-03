@@ -29,3 +29,23 @@ document.querySelectorAll('.policy-header').forEach((header) => {
 		group.classList.toggle('active');
 	});
 });
+
+// Chat toggle functionality
+const chatToggleBtn = document.querySelector('.chat-toggle-btn');
+const chatPanel = document.querySelector('.chat-panel');
+const closeChatBtn = document.querySelector('.close-chat-btn');
+
+chatToggleBtn.addEventListener('click', () => {
+    chatPanel.classList.add('active');
+});
+
+closeChatBtn.addEventListener('click', () => {
+    chatPanel.classList.remove('active');
+});
+
+// Close chat panel when clicking outside
+document.addEventListener('click', (e) => {
+    if (!chatPanel.contains(e.target) && !chatToggleBtn.contains(e.target)) {
+        chatPanel.classList.remove('active');
+    }
+});
